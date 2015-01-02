@@ -43,7 +43,7 @@ function addAUser(name,password, res)
 				}
 				else  //user already there. send error message
 				{
-					res.json({message:'duplicate'});
+					res.json({message:'failed:duplicate'});
 					db.close();
 				}		
 			});
@@ -58,18 +58,18 @@ function login(name,password,res)
 			db.close();			
 			if(docs.length <= 0)
 			{
-				res.json({message:'false'});
+				res.json({message:'failed:no user by that name'});
 			}
 			else
 			{
 				var signature = encryptPassword(password+docs[0].salt);
 				if(docs[0].pass === signature)
 				{
-					res.json({message:'true'});
+					res.json({message:'success'});
 				}				
 				else
 				{
-					res.json({message:'false'});
+					res.json({message:'failed: wrong password'});
 				}
 			}
 		
@@ -86,7 +86,7 @@ function updateList(name,password,lists,res)
 			if(docs.length <= 0)
 			{
 				db.close();
-				res.json({message:'false:no user'});
+				res.json({message:'failed:no user'});
 			}
 			else
 			{
@@ -110,7 +110,7 @@ function updateList(name,password,lists,res)
 								{
 									console.log('Error on delete: ' + err);
 									//close trasaction as false
-									res.json({message:'failed db update'});
+									res.json({message:'failed: db update'});
 								}
 							db.close();
 							});
@@ -129,7 +129,7 @@ function updateList(name,password,lists,res)
 				else
 				{
 					db.close();
-					res.json({message:'false:bad password'});
+					res.json({message:'failed:bad password'});
 				}
 			}
 			
@@ -146,7 +146,7 @@ function getAllTasks(username,password,res)
 			if(docs.length <= 0)
 			{
 				db.close();
-				res.json({message:'false:no user'});
+				res.json({message:'failed:no user'});
 			}
 			else
 			{
@@ -173,7 +173,7 @@ function getAllTasks(username,password,res)
 				}
 				else
 				{
-					res.json({message:'false:bad password'});
+					res.json({message:'failed:bad password'});
 				}
 			}
 			db.close();
@@ -191,7 +191,7 @@ function addATask(name,password,addList,res)
 			if(docs.length <= 0)
 			{
 				db.close();
-				res.json({message:'false:no user'});
+				res.json({message:'failed:no user'});
 			}
 			else
 			{
@@ -204,14 +204,14 @@ function addATask(name,password,addList,res)
 						if(!err)
 							res.json({message:'success'});
 						else
-							res.json({message:'error'});
+							res.json({message:'failed'});
 						db.close();
 					});
 				}
 				else
 				{
 					db.close();
-					res.json({message:'invalid password'});
+					res.json({message:'failed:invalid password'});
 				}
 			}
 		});
@@ -227,7 +227,7 @@ function deleteATask(name,password,deleteList,res)
 			if(docs.length <= 0)
 			{
 				db.close();
-				res.json({message:'false:no user'});
+				res.json({message:'failed:no user'});
 			}
 			else
 			{
@@ -240,14 +240,14 @@ function deleteATask(name,password,deleteList,res)
 						if(!err)
 							res.json({message:'success'});
 						else
-							res.json({message:'error'});
+							res.json({message:'failed'});
 						db.close();
 					});
 				}
 				else
 				{
 					db.close();
-					res.json({message:'invalid password'});
+					res.json({message:'failed:invalid password'});
 				}
 			}
 		});
