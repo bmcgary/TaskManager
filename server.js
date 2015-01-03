@@ -12,8 +12,8 @@ var port = 1337;
 
 var router = express.Router();
 
-router.get('/regester',function(req,res){routesHandled.addAUser(req,res)});
-router.get('/login',function(req,res){routesHandled.login(req,res)});
+router.post('/register',function(req,res){routesHandled.addAUser(req,res)});
+router.post('/login',function(req,res){routesHandled.login(req,res)});
 router.post('/updateList',function(req,res){routesHandled.updateList(req,res)});
 router.post('/getAllTasks',function(req,res){routesHandled.getAllTasks(req,res)});
 router.post('/addTask',function(req,res){routesHandled.addTask(req,res)});

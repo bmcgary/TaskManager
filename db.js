@@ -169,7 +169,7 @@ function getAllTasks(username,password,res)
 						tempTask['status'] = docs[0].tasks[i].status;
 						(myMap[docs[0].tasks[i].section]).push(docs[0].tasks[i]);*/
 					} 
-					res.json({message:success} + list);
+					res.json({message:"success",tasks:list});
 				}
 				else
 				{
