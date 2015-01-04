@@ -31,7 +31,7 @@ function addAUser(name,password, res)
 						db.close();
 						if(err)
 						{
-							console.log("There was an error " + err);
+							console.log("Add a user error " + err);
 							res.json({message:'failed'});
 						}
 						else
